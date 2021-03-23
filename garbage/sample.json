@@ -1,0 +1,24 @@
+{
+  "orderItems": [
+    {
+      "product": "A",
+      "quantity": 1,
+      "discount": 0
+    },
+    {
+      "product": "B",
+      "quantity": 2,
+      "discount": 0
+    },
+    {
+      "product": "C",
+      "quantity": 3,
+      "discount": 0
+    }
+  ],
+  "customre": {
+    "name": "TestCustomer",
+    "billingAdress": "Test Test"
+  },
+  "extraInfo": "Nothing"
+}
