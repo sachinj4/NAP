@@ -14,8 +14,9 @@ export class AppService {
 
   confirmOrder(order: Order): { message: string } {
     console.log(JSON.stringify(order));
+    order['key'] = '2';
     this.client
-      .emit('admint-test', order)
+      .emit('order', { key: 2, value: order, partition: 1 })
       .pipe(map((val) => console.log('##############', val)));
 
     return { message: 'Welcome to api!' };

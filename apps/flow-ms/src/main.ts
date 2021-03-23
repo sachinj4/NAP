@@ -6,6 +6,7 @@
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { Transport, MicroserviceOptions } from '@nestjs/microservices';
+import { AppClusterService } from './app/app-cluster.service';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
@@ -25,4 +26,4 @@ async function bootstrap() {
   );
   app.listen(() => console.log('Microservice is listening'));
 }
-bootstrap();
+AppClusterService.clusterize(bootstrap);

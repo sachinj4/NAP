@@ -4,3 +4,13 @@ docker context inspect default
 kubectl proxy
 nx serve api
 nx serve flow-ms
+
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/login
+
+kubectl exec -it <kafka-connect-service-name>  -c <cluster-ip> -n labkafka -- kafka-topics --create --topic <topic_name> --bootstrap-server <bootstrap-server>
+
+kubectl exec -it kafka-service -c 10.104.200.236 -n kafka -- kafka-topics --create --topic order  --partitions 2 --bootstrap-server <bootstrap-server>
+
+kubectl -n default exec kafka-broker0-fc77b679b-qwrd5 -- /usr/bin/kafka-topics --zookeeper zoo1:2181 --topic test4 --create --partitions 3 --replication-factor 1
+
+kubectl -n default exec kafka-broker0-fc77b679b-qwrd5 -- /opt/bitnami/kafka/bin/kafka-topics.sh --create --zookeeper zoo1:2181 --replication-factor 1 --partitions 2 --topic product
