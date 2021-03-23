@@ -1,0 +1,6 @@
+kubectl apply -f zooservice.yaml
+kubectl -n kubernetes-dashboard describe secret
+docker context inspect default
+kubectl proxy
+nx serve api
+nx serve flow-ms

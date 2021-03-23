@@ -7,7 +7,7 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @EventPattern('user_created')
+  @EventPattern('admint-test')
   async handleUserCreated(data: Record<string, unknown>) {
     console.log('Event Received @@@@@@ ', data);
   }

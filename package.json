@@ -76,6 +76,7 @@
     "@nestjs/platform-express": "^7.0.0",
     "@nestjs/swagger": "^4.8.0",
     "@nrwl/angular": "^11.5.2",
+    "kafkajs": "^1.15.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~6.6.3",
     "swagger-ui-express": "^4.1.6",

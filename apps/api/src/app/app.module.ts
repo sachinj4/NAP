@@ -9,10 +9,15 @@ import { Transport, ClientsModule } from '@nestjs/microservices';
     ClientsModule.register([
       {
         name: 'FLOW_SERVICE',
-        transport: Transport.TCP,
+        transport: Transport.KAFKA,
         options: {
-          host: 'localhost',
-          port: 3334,
+          client: {
+            clientId: 'flow',
+            brokers: ['localhost:9092'],
+          },
+          consumer: {
+            groupId: 'flow-consumer',
+          },
         },
       },
     ]),

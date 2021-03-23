@@ -1,11 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ClientProxy } from '@nestjs/microservices';
+import { ClientKafka } from '@nestjs/microservices';
 import { Order } from './dto/order.dto';
 import { map } from 'rxjs/operators';
 
 @Injectable()
 export class AppService {
-  constructor(@Inject('FLOW_SERVICE') private client: ClientProxy) {
+  constructor(@Inject('FLOW_SERVICE') private client: ClientKafka) {
     console.log('$$$$$$$$$$$$$$', client);
   }
   getData(): { message: string } {
@@ -15,8 +15,9 @@ export class AppService {
   confirmOrder(order: Order): { message: string } {
     console.log(JSON.stringify(order));
     this.client
-      .emit('user_created', order)
+      .emit('admint-test', order)
       .pipe(map((val) => console.log('##############', val)));
+
     return { message: 'Welcome to api!' };
   }
 }
