@@ -6,6 +6,7 @@
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { Transport, MicroserviceOptions } from '@nestjs/microservices';
+import { PartitionAssigners } from '@nestjs/microservices/external/kafka.interface';
 import { AppClusterService } from './app/app-cluster.service';
 import { AppModule } from './app/app.module';
 
@@ -16,14 +17,15 @@ async function bootstrap() {
       transport: Transport.KAFKA,
       options: {
         client: {
-          brokers: ['localhost:9092'],
+          brokers: ['kafka-service:19092'],
         },
         consumer: {
           groupId: 'flow-consumer',
+          partitionAssigners: [PartitionAssigners.roundRobin],
         },
       },
     }
   );
   app.listen(() => console.log('Microservice is listening'));
 }
-AppClusterService.clusterize(bootstrap);
+bootstrap();

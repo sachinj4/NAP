@@ -3,7 +3,7 @@ apiVersion: apps/v1
 metadata:
   name: zookeeper-deploy
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: zookeeper-1
@@ -69,7 +69,7 @@ apiVersion: apps/v1
 metadata:
   name: kafka-broker0
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: kafka
@@ -103,6 +103,6 @@ spec:
             - name: KAFKA_LISTENER_SECURITY_PROTOCOL_MAP
               value: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
             - name: KAFKA_ADVERTISED_LISTENERS
-              value: EXTERNAL://localhost:9092
+              value: EXTERNAL://localhost:9092,INTERNAL://kafka-service:19092
             - name: KAFKA_INTER_BROKER_LISTENER_NAME
-              value: EXTERNAL
+              value: INTERNAL

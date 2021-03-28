@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_08aj2ji" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+  <bpmn:process id="Process_0v4w5k3" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1yxsw7x</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1yxsw7x" sourceRef="StartEvent_1" targetRef="Activity_1ltz3wz" />
+    <bpmn:serviceTask id="Activity_1ltz3wz" name="multiplyAndDelay">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="price" />
+          <camunda:outputParameter name="price1" />
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1yxsw7x</bpmn:incoming>
+      <bpmn:outgoing>Flow_1slf0b3</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_1mh5gn3" name="addAndlog">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="price1" />
+          <camunda:outputParameter name="price2" />
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1slf0b3</bpmn:incoming>
+      <bpmn:outgoing>Flow_1uy1143</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1slf0b3" sourceRef="Activity_1ltz3wz" targetRef="Activity_1mh5gn3" />
+    <bpmn:endEvent id="Event_004k9ym">
+      <bpmn:incoming>Flow_1uy1143</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1uy1143" sourceRef="Activity_1mh5gn3" targetRef="Event_004k9ym" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0v4w5k3">
+      <bpmndi:BPMNEdge id="Flow_1yxsw7x_di" bpmnElement="Flow_1yxsw7x">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="250" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1slf0b3_di" bpmnElement="Flow_1slf0b3">
+        <di:waypoint x="350" y="117" />
+        <di:waypoint x="370" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1uy1143_di" bpmnElement="Flow_1uy1143">
+        <di:waypoint x="470" y="117" />
+        <di:waypoint x="502" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_06xyw3m_di" bpmnElement="Activity_1ltz3wz">
+        <dc:Bounds x="250" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1s9jr92_di" bpmnElement="Activity_1mh5gn3">
+        <dc:Bounds x="370" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_004k9ym_di" bpmnElement="Event_004k9ym">
+        <dc:Bounds x="502" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

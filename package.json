@@ -25,7 +25,10 @@
     "update": "nx migrate latest",
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "build:flow-ms": "nx build flow-ms",
+    "copy-files:flow-ms": "shx cp deployment/flow-ms/Dockerfile dist/apps/flow-ms && shx cp package.json dist/apps/flow-ms",
+    "dokcer-build:flow-ms": "npm run build:flow-ms && npm run copy-files:flow-ms && cd dist/apps/flow-ms && docker build -t sachinj4/flow-ms:0.0.1 . "
   },
   "private": true,
   "devDependencies": {
@@ -76,9 +79,11 @@
     "@nestjs/platform-express": "^7.0.0",
     "@nestjs/swagger": "^4.8.0",
     "@nrwl/angular": "^11.5.2",
+    "bpmn-engine": "^11.4.1",
     "kafkajs": "^1.15.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~6.6.3",
+    "shx": "^0.3.3",
     "swagger-ui-express": "^4.1.6",
     "tslib": "^2.0.0",
     "zone.js": "^0.10.2"

@@ -29,4 +29,4 @@ async function bootstrap() {
   });
 }
 
-AppClusterService.clusterize(bootstrap);
+bootstrap();

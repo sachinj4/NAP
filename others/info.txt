@@ -7,10 +7,47 @@ nx serve flow-ms
 
 http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/login
 
-kubectl exec -it <kafka-connect-service-name>  -c <cluster-ip> -n labkafka -- kafka-topics --create --topic <topic_name> --bootstrap-server <bootstrap-server>
 
-kubectl exec -it kafka-service -c 10.104.200.236 -n kafka -- kafka-topics --create --topic order  --partitions 2 --bootstrap-server <bootstrap-server>
+kubectl -n default exec kafka-broker0-7ccc6d96b-76lzw -- /opt/bitnami/kafka/bin/kafka-topics.sh --create --zookeeper zoo1:2181 --replication-factor 1 --partitions 2 --topic product
 
-kubectl -n default exec kafka-broker0-fc77b679b-qwrd5 -- /usr/bin/kafka-topics --zookeeper zoo1:2181 --topic test4 --create --partitions 3 --replication-factor 1
+ kafka-consumer-groups.sh --describe --group flow-consumer-server --members --bootstrap-server localhost:9092
 
-kubectl -n default exec kafka-broker0-fc77b679b-qwrd5 -- /opt/bitnami/kafka/bin/kafka-topics.sh --create --zookeeper zoo1:2181 --replication-factor 1 --partitions 2 --topic product
+kafka-console-producer.sh --broker-list localhost:9092 --topic order
+
+kafka-console-producer.sh --broker-list localhost:9092 --topic order --property "parse.key=e" --property "key.separator=:"
+
+kafka-topics.sh --list --zookeeper zoo1:2181
+
+kafka-topics.sh --zookeeper zoo1:2181 --alter --topic order --partitions 2
+
+[ConsumerGroup] Consumer has joined the group {"timestamp":"2021-03-24T12:51:18.734Z","logger":"kafkajs","groupId":"flow-consumer-server","memberId":"nestjs-consumer-server-c6393e28-d865-4d83-b62f-c83a2847e9be","leaderId":"nestjs-consumer-server-c6393e28-d865-4d83-b62f-c83a2847e9be","isLeader":true,"memberAssignment":{},"groupProtocol":"RoundRobinAssigner","duration":33}
+
+ [ConsumerGroup] Consumer has joined the group {"timestamp":"2021-03-24T12:51:18.737Z","logger":"kafkajs","groupId":"flow-consumer-server","memberId":"nestjs-consumer-server-a70a1c48-833c-4233-a74a-416a81ef5414","leaderId":"nestjs-consumer-server-c6393e28-d865-4d83-b62f-c83a2847e9be","isLeader":false,"memberAssignment":{"order":[0]},"groupProtocol":"RoundRobinAssigner","duration":20}
+ [ConsumerGroup] Consumer has joined the group {"timestamp":"2021-03-24T12:41:58.949Z","logger":"kafkajs","groupId":"flow-consumer-server","memberId":"nestjs-consumer-server-a3de6e80-21e4-469f-8625-0abb1a460983","leaderId":"nestjs-consumer-server-a3de6e80-21e4-469f-8625-0abb1a460983","isLeader":true,"memberAssignment":{},"groupProtocol":"RoundRobinAssigner","duration":1105}
+ [ConsumerGroup] Consumer has joined the group {"timestamp":"2021-03-24T13:01:55.176Z","logger":"kafkajs","groupId":"flow-consumer-server","memberId":"nestjs-consumer-server-6322f62c-8e0a-4039-848d-f8fa1494ffca","leaderId":"nestjs-consumer-server-c6393e28-d865-4d83-b62f-c83a2847e9be","isLeader":false,"memberAssignment":{"order":[0]},"groupProtocol":"RoundRobinAssigner","duration":2612}
+ [ConsumerGroup] Consumer has joined the group {"timestamp":"2021-03-24T13:01:55.185Z","logger":"kafkajs","groupId":"flow-consumer-server","memberId":"nestjs-consumer-server-a70a1c48-833c-4233-a74a-416a81ef5414","leaderId":"nestjs-consumer-server-c6393e28-d865-4d83-b62f-c83a2847e9be","isLeader":false,"memberAssignment":{},"groupProtocol":"RoundRobinAssigner","duration":23}
+
+
+ Event Received @@@@@@  { magicByte: 2,
+  attributes: 0,
+  timestamp: '1616610875271',
+  offset: '95',
+  key: 'key1',
+  value: 'order1xYYZZZZZZZZZZZZZ',
+  headers: {},
+  isControlRecord: false,
+  batchContext:
+   { firstOffset: '95',
+     firstTimestamp: '1616610875271',
+     partitionLeaderEpoch: 0,
+     inTransaction: false,
+     isControlBatch: false,
+     lastOffsetDelta: 0,
+     producerId: '-1',
+     producerEpoch: 0,
+     firstSequence: 0,
+     maxTimestamp: '1616610875271',
+     timestampType: 0,
+     magicByte: 2 },
+  topic: 'order',
+  partition: 0 }
